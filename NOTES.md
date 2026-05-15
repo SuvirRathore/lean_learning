@@ -17,7 +17,7 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 ### 2026-05-10 (Sun, Week 0)
 - Finished Natural Number Game (web version at adam.math.hhu.de)
 
-### 2026-05-11 (Mon, Week 1)
+### 2026-05-11 (Mon, Week 1.1)
 - Installed Lean 4.29.1 (ARM-native) via VS Code + lean4 extension
 - Forked MIL repo as `lean_learning`, cloned locally, fetched mathlib cache
 - Made `MIL_work/` copy
@@ -25,11 +25,26 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Committed first changes to fork
 - *Status vs schedule:* slightly ahead
 
+## 2026-05-12 (Tues, Week 1.2)
+- Read MIL §1.1, §1.2 (overview material)
+- Worked through all sorrys in MIL_work/C02_Basics/S01_Calculating.lean (§2.1)
+- Finished within session budget, no major blockers
+
+## 2026-05-13 (Wed, Week 1.3)
+- Worked through §2.2 (S02_Proving_Identities_in_Algebraic_Structures.lean)
+- First exposure to typeclass arguments ([CommRing R] etc.) and the ring tactic
+- Used group on the last two group-theory exercises (the group-theoretic counterpart to ring) — fine shortcut
+
+## 2026-05-14 (Thurs, Week 1.4)
+- Completed all §2.3 exercises (S03_Using_Theorems_and_Lemmas.lean)
+- Final absolute-value exercise done with abs_le'.mpr + two haves with calc/pow_two_nonneg + constructor + two linariths
+- New tools added: apply, linarith, calc, constructor, · … bullets, abs_le', pow_two_nonneg, the have h : P (with proof on indented next lines) pattern, and the <conclusion>_of_<hypotheses> lemma-naming convention
+
 ---
 
-## Tactics learned (running glossary)
+## Useful Tactics learned (running glossary)
 
-From NNG:
+A few starters
 - `rfl` — proves `a = a`
 - `rw [h]` — rewrite using hypothesis or lemma `h`
 - `rw [← h]` — rewrite using `h` in reverse direction
