@@ -48,20 +48,57 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 
 ---
 
-## Useful Tactics learned (running glossary)
+## Useful Tactics and others (running glossary)
 
-A few starters
+A few starters from Natural Numbers Game
 - `rfl` — proves `a = a`
 - `rw [h]` — rewrite using hypothesis or lemma `h`
+- `nth_rewrite k` - just rewrites kth appearance
 - `rw [← h]` — rewrite using `h` in reverse direction
-- `induction n with d hd` — induction on `Nat`
+- `induction n with d hd` — induction on `Nat`, can add `generalizing c`
 - `exact h` — close goal exactly matching `h`
 - `intro h` — introduce hypothesis for `→` or `∀` goal
-- `apply h` — backward reasoning
-- (extend as I encounter new ones in MIL)
+- `apply t` — backward reasoning; t : P → Q then replaces goal Q with P, or applied to hypothesis P changes it to Q
+- ` ≠ ` - statement for equal implies false
+- `symm` - changes goal x = y to y = x
+- `simp` - rewrites every lemma tagged with simp as much as it can, can further add simp[lemma], also add algorithms
+- `trivial` - solves goal True
+- `right` - changes goal P or Q to Q
+- `tauto` - solves goal solvable by truth tables (logical)
+- `have` - adds new hypothesis
 
-From MIL so far:
-- (to fill in)
+Additional from MIL (so far):
+- 2.1: Caluclating, e.g sub_self
+- `#check` - shows what follows (useful for checking guess of name of theorem)
+
+- 2.2: Algebraic Structures, e.g  mul_sub
+- `ring, group, abel, noncomm_ring` - executes statements obviously true in these structures
+
+- 2.3: Theorems and lemmas, e.g le_trans, exp_le_exp.mp, abs_le'
+- `linarith` - handles linear arithmetic using definitions
+- `iff` - statements of the form P iff Q, use .mp or .mpr to execute certain direction
+- `norm_num` - proves A = B (numerical expressions) using standard operations
+- `constructor` - splits conjunction into two goals
+
+- Libraries: (Finding names) e.g A_of_B_of_C
+- `Mathlib` - in Github also use API documentation
+- `Loogle`
+- Standard conventions in Mathlib
+- Right click
+- `Apply?` - suggested tactic to apply
+- AI of course
+
+- 2.4: More Examples, e.g abs_add (tri ineq),
+- `min, max, Nat.gcd, lcm, dvd`
+- `show` finds first goal equal to t and makes it main goal
+
+- 2.5: Facts in Algebraic Structures, e.g inf_le_inf, sup_inf_right, dist_triangle
+- `Lattice` - structure with partial order and inf + sup e.g min + max on total order, intersection + union of subsets with inclusion, and + or with partial order x ≤ y if x False or y True, gcd + lcm on ℕ with divisibility, linear subspaces intersection + sum with inclusion, collection of topologies Union (gen) + intersection with reverse inclusion
+- `Distributive lattice` - inf and sup satisfy distribution laws
+- Combine axioms e.g strict order ring has mul_pos, add_le_add_left, mul_nonneg
+- `Metric Space` - usual laws e.g dist_triangle
+
+
 
 ---
 
