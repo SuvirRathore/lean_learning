@@ -46,11 +46,24 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Completed §2.4 exercises (S04_More_on_Order_and_Divisibility.lean) covering both order and divisibility
 - New tools added: min/max lemmas (min_le_left, min_le_right, le_min, le_max_left, etc.), dvd lemmas, abs_add for triangle inequality, show tactic
 
+## 17-05-2026 (Sun, Week 1.7)
+
+- Completed §2.5 exercises (S05_Proving_Facts_about_Algebraic_Structures.lean), closing out Ch 2
+- Worked with lattices and partial orders abstractly via ⊓ (inf) and ⊔ (sup)
+- New tools added: inf and sup operations, inf_le_left, inf_le_right, le_inf, le_sup_left, le_sup_right, sup_le, distributivity lemmas (inf_sup_left, sup_inf_right), absorption laws (absorb1, absorb2)
+
+## Week 1 summary
+
+- Setup complete: Lean 4.29.1 installed, MIL repo forked as lean_learning, mathlib cache fetched, MIL_work copy made, git workflow live
+- Completed MIL Ch 2 in full (§2.1-2.5): equality rewriting, algebraic structures, ordering, divisibility, lattices
+- Pace ~5x ahead of plan's Ch 1-5 / Weeks 1-22 allocation; expected to self-correct in Ch 3+
+
 ---
 
 ## Useful Tactics and others (running glossary)
 
-A few starters from Natural Numbers Game
+# A few starters from Natural Numbers Game:
+
 - `rfl` — proves `a = a`
 - `rw [h]` — rewrite using hypothesis or lemma `h`
 - `nth_rewrite k` - just rewrites kth appearance
@@ -68,19 +81,20 @@ A few starters from Natural Numbers Game
 - `have` - adds new hypothesis
 
 Additional from MIL (so far):
-- 2.1: Caluclating, e.g sub_self
+
+# 2.1: Caluclating, e.g sub_self
 - `#check` - shows what follows (useful for checking guess of name of theorem)
 
-- 2.2: Algebraic Structures, e.g  mul_sub
+# 2.2: Algebraic Structures, e.g  mul_sub
 - `ring, group, abel, noncomm_ring` - executes statements obviously true in these structures
 
-- 2.3: Theorems and lemmas, e.g le_trans, exp_le_exp.mp, abs_le'
+# 2.3: Theorems and lemmas, e.g le_trans, exp_le_exp.mp, abs_le'
 - `linarith` - handles linear arithmetic using definitions
 - `iff` - statements of the form P iff Q, use .mp or .mpr to execute certain direction
 - `norm_num` - proves A = B (numerical expressions) using standard operations
 - `constructor` - splits conjunction into two goals
 
-- Libraries: (Finding names) e.g A_of_B_of_C
+# Libraries: (Finding names) e.g A_of_B_of_C
 - `Mathlib` - in Github also use API documentation
 - `Loogle`
 - Standard conventions in Mathlib
@@ -88,11 +102,11 @@ Additional from MIL (so far):
 - `Apply?` - suggested tactic to apply
 - AI of course
 
-- 2.4: More Examples, e.g abs_add (tri ineq),
+# 2.4: More Examples, e.g abs_add (tri ineq),
 - `min, max, Nat.gcd, lcm, dvd`
 - `show` finds first goal equal to t and makes it main goal
 
-- 2.5: Facts in Algebraic Structures, e.g inf_le_inf, sup_inf_right, dist_triangle
+# 2.5: Facts in Algebraic Structures, e.g inf_le_inf, sup_inf_right, dist_triangle
 - `Lattice` - structure with partial order and inf + sup e.g min + max on total order, intersection + union of subsets with inclusion, and + or with partial order x ≤ y if x False or y True, gcd + lcm on ℕ with divisibility, linear subspaces intersection + sum with inclusion, collection of topologies Union (gen) + intersection with reverse inclusion
 - `Distributive lattice` - inf and sup satisfy distribution laws
 - Combine axioms e.g strict order ring has mul_pos, add_le_add_left, mul_nonneg
