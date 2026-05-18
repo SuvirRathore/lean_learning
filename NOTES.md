@@ -58,6 +58,15 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Completed MIL Ch 2 in full (§2.1-2.5): equality rewriting, algebraic structures, ordering, divisibility, lattices
 - Pace ~5x ahead of plan's Ch 1-5 / Weeks 1-22 allocation; expected to self-correct in Ch 3+
 
+## 18-05-2026 (Mon, Week 2.1)
+
+- Completed §3.1 exercises (S01_Implication_and_the_Universal_Quantifier.lean)
+- Met implicit variables with curly braces {x : α} for arguments Lean infers automatically
+- Worked with predicate definitions: FnUb (function upper bound), FnLb (function lower bound), Monotone, Injective, Subset, Even, Odd
+- Saw lambda abstraction in term-mode proofs (fun x => ...) as a parallel to tactic-mode intro
+- New tools added: dsimp for definitional simplification (unfolds things like fun x ↦ f x + g x to f x + g x), erw as a more permissive variant of rw, the underscore trick (write _ then Cmd+Space) to surface lemma name suggestions
+- Gotcha: mul_right_inj fails on variables in a generic ring R with "failed to synthesize IsLeftCancelMul R" — use mul_right_inj' instead, which has the needed hypothesis baked in differently
+
 ---
 
 ## Useful Tactics and others (running glossary)
@@ -111,6 +120,14 @@ Additional from MIL (so far):
 - `Distributive lattice` - inf and sup satisfy distribution laws
 - Combine axioms e.g strict order ring has mul_pos, add_le_add_left, mul_nonneg
 - `Metric Space` - usual laws e.g dist_triangle
+
+# 3.1: Implications and Universal Quantifiers
+- curly bracket around variables signify implicit
+- Predicates such as function UB/LB, monotone, injective, odd/even fns, subset
+- `dsimp` - command to simplify things like fun x ↦ fx + gx applied to x
+- Lambda abstraction in type theory temporarily adds objects (and hyp)
+- trick of underscroll `_` followed by cmd + space to see whats left to prove
+- IsLeftCancel ℝ fails to be verified to use mul_right_inj (as has 0), append `'` to remove 0
 
 
 
