@@ -151,6 +151,7 @@ example (ef : FnEven f) (og : FnOdd g) : FnOdd fun x ↦ f x * g x := by
     _ = f (-x) * (-g (-x)) := by rw [ef, og]
     _ = -(f (-x) * g (-x)) := by rw [mul_neg]
 
+
 example (ef : FnEven f) (og : FnOdd g) : FnEven fun x ↦ f (g x) := by
   intro x
   calc
