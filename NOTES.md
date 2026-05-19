@@ -67,6 +67,11 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - New tools added: dsimp for definitional simplification (unfolds things like fun x ↦ f x + g x to f x + g x), erw as a more permissive variant of rw, the underscore trick (write _ then Cmd+Space) to surface lemma name suggestions
 - Gotcha: mul_right_inj fails on variables in a generic ring R with "failed to synthesize IsLeftCancelMul R" — use mul_right_inj' instead, which has the needed hypothesis baked in differently
 
+## 19-05-2026 (Tue, Week 2.2)
+- Completed §3.2 exercises (S02_The_Existential_Quantifier.lean)
+- Practised witness-supplying with use and witness-extracting with rcases (and its anonymous-constructor abbreviations using rfl)
+- New tools added: use, constructor, rcases with destructuring patterns, rintro (combines intro and rcases for one-step pattern-matching introduction), field_simp for clearing denominators in field expressions
+
 ---
 
 ## Useful Tactics and others (running glossary)
@@ -128,6 +133,14 @@ Additional from MIL (so far):
 - Lambda abstraction in type theory temporarily adds objects (and hyp)
 - trick of underscroll `_` followed by cmd + space to see whats left to prove
 - IsLeftCancel ℝ fails to be verified to use mul_right_inj (as has 0), append `'` to remove 0
+
+# 3.2 Existential Quantifier
+- `use` - tactic to provide object for there exists ..
+- `constructor` - constructs proof of existential q
+- `rcases` - tactic unpacks expressions (not just hyp) from there exists q; rcases h with ⟨x, rfl⟩ - comes with abbreviation
+- `rintro` - combines intro and rcases
+- `obtain` tactic provides suggestive syntax
+- `field_simp` - clear denominators, use with `ring`
 
 
 
