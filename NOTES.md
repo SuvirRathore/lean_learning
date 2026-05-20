@@ -72,6 +72,11 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Practised witness-supplying with use and witness-extracting with rcases (and its anonymous-constructor abbreviations using rfl)
 - New tools added: use, constructor, rcases with destructuring patterns, rintro (combines intro and rcases for one-step pattern-matching introduction), field_simp for clearing denominators in field expressions
 
+## 20-05-2026 (Wed, Week 2.3)
+- Completed §3.3 exercises (S03_Negation.lean)
+- Internalised ¬ P as shorthand for P → False
+- New tools added: let (introduces a local definition), push_neg (pushes negations inward through connectives/quantifiers), contrapose and contrapose! (switch goal to its contrapositive, ! variant also applies push_neg), exfalso (changes goal to False), absurd (combines a proposition with its negation to derive anything), contradiction (closes a goal when contradictory hypotheses are present)
+
 ---
 
 ## Useful Tactics and others (running glossary)
@@ -141,6 +146,16 @@ Additional from MIL (so far):
 - `rintro` - combines intro and rcases
 - `obtain` tactic provides suggestive syntax
 - `field_simp` - clear denominators, use with `ring`
+
+# 3.3 Negation ¬A is A → False
+- `let` - adds local definition
+- `by_contra` - proves goal assuming ¬Q and derive contradiction
+- `push_neg` - pushes not forall inwards, so becomes there exists etc
+- `contrapose` - contraposes goal from hyp
+- `contrapose!` - also applies push_neg
+- `exfalso` - false proves anything
+- `absurd` - closes goal if contradictory statements inputted
+- `contradiction` - closes goal if can find contradictory hypotheses like linarith (if direct)
 
 
 
