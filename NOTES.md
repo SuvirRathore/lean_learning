@@ -77,6 +77,13 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Internalised ¬ P as shorthand for P → False
 - New tools added: let (introduces a local definition), push_neg (pushes negations inward through connectives/quantifiers), contrapose and contrapose! (switch goal to its contrapositive, ! variant also applies push_neg), exfalso (changes goal to False), absurd (combines a proposition with its negation to derive anything), contradiction (closes a goal when contradictory hypotheses are present)
 
+## 21-05-2026 (Thu, Week 2.4)
+
+- Completed §3.4 exercises (S04_Conjunction_and_Iff.lean)
+- Practised ∧ and ↔ construction/destruction patterns
+- New tools added: assumption (closes goal if it matches a hypothesis directly), the <;> combinator (applies the next tactic to all subgoals produced by the previous one, e.g. constructor <;> linarith), h.left and h.right for extracting conjunction components from a hypothesis without unpacking, also applicable to iffs as h.mp and h.mpr
+- Reinforced: rcases, rintro, have for ∧/↔ destructuring as alternatives
+
 ---
 
 ## Useful Tactics and others (running glossary)
@@ -156,6 +163,11 @@ Additional from MIL (so far):
 - `exfalso` - false proves anything
 - `absurd` - closes goal if contradictory statements inputted
 - `contradiction` - closes goal if can find contradictory hypotheses like linarith (if direct)
+
+# 3.4 Conjunction and iff
+- `constructor <;>` as before, but can add eg linarith after to apply to both A and B
+- `assumption` - tactic to find assumption to solve goal
+- use linarith[...] or rw[...] for elegant ways to solve goal
 
 
 
