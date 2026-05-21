@@ -187,8 +187,9 @@ variable (a b c : α)
 example : ¬a < a := by
   rw [lt_iff_le_not_ge]
   contrapose!
-  intro h h'
-  exact h'
+  tauto
+  --intro h h'
+  --exact h'
 
 example : a < b → b < c → a < c := by
   simp only [lt_iff_le_not_ge]
