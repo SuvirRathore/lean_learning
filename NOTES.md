@@ -84,6 +84,12 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - New tools added: assumption (closes goal if it matches a hypothesis directly), the <;> combinator (applies the next tactic to all subgoals produced by the previous one, e.g. constructor <;> linarith), h.left and h.right for extracting conjunction components from a hypothesis without unpacking, also applicable to iffs as h.mp and h.mpr
 - Reinforced: rcases, rintro, have for ∧/↔ destructuring as alternatives
 
+## 22-05-2026 (Fri, Week 2.5)
+
+- Completed §3.5 exercises (S05_Disjunction.lean)
+- Practised disjunction introduction and elimination
+- New tools added: left and right (commit to one side of ∨ goal), Or.inl and Or.inr (term-mode equivalents), rcases with the | pattern for splitting disjunction hypotheses (contrasted with the ⟨_, _⟩ pattern for conjunctions), next (advances to the next subgoal explicitly), match (pattern-match expressions inline), by_cases (classical case split on whether P or ¬ P holds)
+
 ---
 
 ## Useful Tactics and others (running glossary)
@@ -169,7 +175,12 @@ Additional from MIL (so far):
 - `assumption` - tactic to find assumption to solve goal
 - use linarith[...] or rw[...] for elegant ways to solve goal
 
-
+# 3.5 Disjunction
+- `left,right` - tactics to prove A or B resp. for goal A or B
+- `Or.inl, Or.inr` - combines or and induction appropriately
+- rcases for hypotheses using vertical bar instead of angle brackets like in conjunctions
+- `next, match` instead or rcases or cases
+- `by_cases` - splits into classical cases for statement or its negation
 
 ---
 
