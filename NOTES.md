@@ -95,6 +95,12 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Completed §3.6 exercises (S06_Sequences_and_Convergence.lean), working with ε-N definitions of convergence
 - New tools added: ext (extensionality — reduces function/set equality to pointwise), congr (reduces equality of compound expressions to equalities of components), simp (general simplifier applying @[simp]-tagged lemmas), practised nested quantifier handling in convergence proofs
 
+## Week 2 summary
+
+- Completed MIL §3.1-3.6: first-order logic in full (implication, universals, existentials, negation, conjunction and iff, disjunction) plus sequences and convergence
+- First serious workout of nested quantifiers via ε-N convergence proofs
+- Added structural and automation tactics: rintro, obtain, <;>, tauto, simp, ext, congr; classical kit (by_cases, by_contra, push_neg, contrapose)
+
 ---
 
 ## Useful Tactics and others (running glossary)
