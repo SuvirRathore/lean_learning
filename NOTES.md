@@ -90,6 +90,11 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Practised disjunction introduction and elimination
 - New tools added: left and right (commit to one side of ∨ goal), Or.inl and Or.inr (term-mode equivalents), rcases with the | pattern for splitting disjunction hypotheses (contrasted with the ⟨_, _⟩ pattern for conjunctions), next (advances to the next subgoal explicitly), match (pattern-match expressions inline), by_cases (classical case split on whether P or ¬ P holds)
 
+## 24-05-2026 (Sun, Week 2.7)
+
+- Completed §3.6 exercises (S06_Sequences_and_Convergence.lean), working with ε-N definitions of convergence
+- New tools added: ext (extensionality — reduces function/set equality to pointwise), congr (reduces equality of compound expressions to equalities of components), simp (general simplifier applying @[simp]-tagged lemmas), practised nested quantifier handling in convergence proofs
+
 ---
 
 ## Useful Tactics and others (running glossary)
@@ -181,6 +186,11 @@ Additional from MIL (so far):
 - rcases for hypotheses using vertical bar instead of angle brackets like in conjunctions
 - `next, match` instead or rcases or cases
 - `by_cases` - splits into classical cases for statement or its negation
+
+# 3.6 Sequences and Convergence
+- `ext` - reduces function/set equality to pointwise equality
+- `congr` - reduces equality of compound expressions to equalities of components eg |a| = |b| to a = b
+- `simp` - general simplifier applying @[simp]-tagged lemmas
 
 ---
 
