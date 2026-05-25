@@ -44,7 +44,23 @@ example : s ∩ (t ∪ u) ⊆ s ∩ t ∪ s ∩ u := by
   · right; exact ⟨xs, xu⟩
 
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
-  sorry
+  intro x hx
+  rcases hx with ⟨xs, xt⟩ | ⟨xs, xu⟩
+  -- can replace these two with rintro x (⟨xs, xt⟩ | ⟨xs, xu⟩)
+  simp only [mem_inter_iff]
+  constructor
+  exact xs
+  left
+  exact xt
+  constructor
+  exact xs
+  right
+  exact xu
+  -- better after first line :
+  --use xs; left; exact xt
+  --use xs; right; exact xu
+
+
 example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   intro x xstu
   have xs : x ∈ s := xstu.1.1
@@ -64,7 +80,19 @@ example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   rintro (xt | xu) <;> contradiction
 
 example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
-  sorry
+  intro x xntu
+  have xs : x ∈ s := xntu.1
+  have xntu' : x ∉ t ∪ u := xntu.2
+  constructor
+  use xs
+  contrapose! xntu'
+  left
+  exact xntu'
+  contrapose! xntu'
+  right
+  exact xntu'
+
+
 example : s ∩ t = t ∩ s := by
   ext x
   simp only [mem_inter_iff]
@@ -83,18 +111,81 @@ example : s ∩ t = t ∩ s := by
   · rintro x ⟨xt, xs⟩; exact ⟨xs, xt⟩
 
 example : s ∩ t = t ∩ s :=
-    Subset.antisymm sorry sorry
+    Subset.antisymm (fun x ⟨xs, xt⟩ ↦ ⟨xt, xs⟩) fun x ⟨xt, xs⟩ ↦ ⟨xs, xt⟩
+
+
 example : s ∩ (s ∪ t) = s := by
-  sorry
+  ext x
+  constructor
+  apply And.left
+  rintro xs
+  constructor
+  exact xs
+  left
+  exact xs
+
 
 example : s ∪ s ∩ t = s := by
-  sorry
+  ext x
+  constructor
+  rintro (xs | ⟨xs, xt⟩) <;> exact xs
+  intro xs
+  left
+  exact xs
 
 example : s \ t ∪ t = s ∪ t := by
-  sorry
+  ext x
+  constructor
+  rintro (⟨xs, nxt⟩ | xt)
+  · left
+    exact xs
+  · right
+    exact xt
+
+  by_cases h : x ∈ t
+  · intro
+    right
+    exact h
+  rintro (xs | xt)
+  · left
+    use xs
+  right; exact xt
 
 example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
-  sorry
+  ext x
+  constructor
+  rintro (⟨xs, xnt⟩ | ⟨xt, xns⟩)
+  · constructor
+    left
+    exact xs
+    rintro ⟨_, xt⟩
+    contradiction
+  · constructor
+    right
+    exact xt
+    rintro ⟨xs, _⟩
+    contradiction
+
+  rintro (xs | xt)
+  constructor
+  use xs
+  rintro xt
+  have xst : x ∈ s ∩ t := by
+    constructor
+    exact xs
+    exact xt
+
+  contradiction
+
+  right
+  use xt
+  rintro xs
+  have xst : x ∈ s ∩ t := by
+    constructor
+    exact xs
+    exact xt
+  contradiction
+
 
 def evens : Set ℕ :=
   { n | Even n }
@@ -235,4 +326,3 @@ example : ⋂₀ s = ⋂ t ∈ s, t := by
   rfl
 
 end
-
