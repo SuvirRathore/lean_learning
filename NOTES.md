@@ -101,6 +101,11 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - First serious workout of nested quantifiers via ε-N convergence proofs
 - Added structural and automation tactics: rintro, obtain, <;>, tauto, simp, ext, congr; classical kit (by_cases, by_contra, push_neg, contrapose)
 
+## 25-05-2026 (Mon, Week 3.1)
+
+- Started §4.1 (S01_Sets.lean) — got through roughly half the exercises
+- First exposure to lifting Ch 3 logic to set operations: ∩ as ∧, ∪ as ∨, ⊆ as ∀, set equality via ext
+
 ---
 
 ## Useful Tactics and others (running glossary)
