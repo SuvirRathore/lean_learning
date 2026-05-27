@@ -194,7 +194,8 @@ def odds : Set ℕ :=
   { n | ¬Even n }
 
 example : evens ∪ odds = univ := by
-  rw [evens, odds]
+
+  --rw [evens, odds]
   ext n
   simp [-Nat.not_even_iff_odd]
   apply Classical.em
@@ -206,7 +207,14 @@ example (x : ℕ) : x ∈ (univ : Set ℕ) :=
   trivial
 
 example : { n | Nat.Prime n } ∩ { n | n > 2 } ⊆ { n | ¬Even n } := by
-  sorry
+  intro n
+  simp
+  intro prime_n n_gt2
+  rcases Nat.Prime.eq_two_or_odd prime_n with h | h
+  · rw [h]
+    linarith
+  · rw [Nat.odd_iff, h]
+
 
 #print Prime
 
@@ -242,10 +250,20 @@ section
 variable (ssubt : s ⊆ t)
 
 example (h₀ : ∀ x ∈ t, ¬Even x) (h₁ : ∀ x ∈ t, Prime x) : ∀ x ∈ s, ¬Even x ∧ Prime x := by
-  sorry
+  intro x xs
+  constructor
+  have xt: x ∈ t := ssubt xs
+  apply h₀ x xt
+  have xt: x ∈ t := ssubt xs
+  apply h₁ x xt
+
 
 example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ t, Prime x := by
-  sorry
+  rcases h with ⟨ x, xs, xodd, prime ⟩
+  use x
+  constructor
+  apply ssubt xs
+  exact prime
 
 end
 
@@ -259,6 +277,7 @@ variable (s : Set α)
 open Set
 
 example : (s ∩ ⋃ i, A i) = ⋃ i, A i ∩ s := by
+
   ext x
   simp only [mem_inter_iff, mem_iUnion]
   constructor
@@ -284,7 +303,28 @@ example : (⋂ i, A i ∩ B i) = (⋂ i, A i) ∩ ⋂ i, B i := by
 
 
 example : (s ∪ ⋂ i, A i) = ⋂ i, A i ∪ s := by
-  sorry
+  ext x
+  simp only [mem_union, mem_iInter]
+  constructor
+  · rintro (xs | xI)
+    · intro i
+      right
+      exact xs
+    intro i
+    left
+    exact xI i
+  intro h
+  by_cases xs : x ∈ s
+  · left
+    exact xs
+  right
+  intro i
+  cases h i
+  · assumption
+
+  contradiction
+
+
 
 def primes : Set ℕ :=
   { x | Nat.Prime x }
@@ -305,7 +345,13 @@ example : (⋂ p ∈ primes, { x | ¬p ∣ x }) ⊆ { x | x = 1 } := by
   apply Nat.exists_prime_and_dvd
 
 example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
-  sorry
+  apply eq_univ_of_forall
+  intro x
+  simp
+  rcases Nat.exists_infinite_primes x with ⟨ p, xp, prime⟩
+  use p
+  use prime
+
 
 end
 
