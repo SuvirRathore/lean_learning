@@ -106,6 +106,12 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Started §4.1 (S01_Sets.lean) — got through roughly half the exercises
 - First exposure to lifting Ch 3 logic to set operations: ∩ as ∧, ∪ as ∨, ⊆ as ∀, set equality via ext
 
+## 27-05-2026 (Wed, Week 3.3)
+
+- Completed §4.1 (S01_Sets.lean), felt harder than prior sections
+- Practised lifting Ch 3 logic to sets: ∩ as ∧, ∪ as ∨, ⊆ as ∀, set equality via ext
+- New tools added: rwa (rw followed by assumption, closes the goal if the rewrite makes it match a hypothesis); relied heavily on simp, use, ext for set-membership manipulation
+
 ---
 
 ## Useful Tactics and others (running glossary)
