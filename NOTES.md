@@ -112,6 +112,15 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Practised lifting Ch 3 logic to sets: ∩ as ∧, ∪ as ∨, ⊆ as ∀, set equality via ext
 - New tools added: rwa (rw followed by assumption, closes the goal if the rewrite makes it match a hypothesis); relied heavily on simp, use, ext for set-membership manipulation
 
+## 28-05-2026 (Thu, Week 3.4)
+- Worked through roughly half of §4.2 (`S02_Functions.lean`) — long section
+- Met `image` (`f '' s`) and `preimage` (`f ⁻¹' s`) and their membership-unfolding patterns: image as ∃-witness, preimage as definitional `f x ∈ s`
+- Reached inclusion lemmas for images/preimages with unions
+- Further practice with `use`, `ext`, `rintro` for set-level proofs
+
+
+
+
 ---
 
 ## Useful Tactics and others (running glossary)
@@ -208,6 +217,16 @@ Additional from MIL (so far):
 - `ext` - reduces function/set equality to pointwise equality
 - `congr` - reduces equality of compound expressions to equalities of components eg |a| = |b| to a = b
 - `simp` - general simplifier applying @[simp]-tagged lemmas
+
+# 4.1 Sets
+- `simp` - performs simplification insider exist or for all quant
+- `intro, exact` - etc perform definitional reduction or cases for union
+- intersection higher than union
+- `use` - for goals to find
+- `ext` - works for sets too
+- set builder { y | P y }  unfolds to fun y ↦ Py
+- use Nat.prime.
+- `rwa` - combines rw and assumption tactics
 
 ---
 
