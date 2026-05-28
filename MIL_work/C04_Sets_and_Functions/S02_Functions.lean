@@ -14,6 +14,7 @@ open Function
 open Set
 
 example : f ⁻¹' (u ∩ v) = f ⁻¹' u ∩ f ⁻¹' v := by
+
   ext
   rfl
 
@@ -34,13 +35,32 @@ example : s ⊆ f ⁻¹' (f '' s) := by
   use x, xs
 
 example : f '' s ⊆ v ↔ s ⊆ f ⁻¹' v := by
-  sorry
+  constructor
+  rintro h x xs
+  have h': f x ∈ f '' s := mem_image_of_mem _ xs
+  exact h h'
+
+  rintro h y ys
+  rcases ys with ⟨ x,xs,xy⟩
+  rw[← xy]
+  exact h xs
+
+
 
 example (h : Injective f) : f ⁻¹' (f '' s) ⊆ s := by
-  sorry
+  intro x xpre
+  have h2: f x ∈ f '' s := xpre
+  rcases h2 with ⟨ y,ys,fyx⟩
+  have hyx: y = x := by
+    exact h fyx
+  rw[← hyx]
+  exact ys
 
 example : f '' (f ⁻¹' u) ⊆ u := by
-  sorry
+  rintro y
+  rintro ⟨x,fxu,fxy ⟩
+  rw[← fxy]
+  exact fxu
 
 example (h : Surjective f) : u ⊆ f '' (f ⁻¹' u) := by
   sorry
@@ -81,7 +101,18 @@ example : s ∪ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∪ u) := by
 variable {I : Type*} (A : I → Set α) (B : I → Set β)
 
 example : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
-  sorry
+  ext y
+  simp
+  constructor
+  rintro ⟨ x , ⟨ i, xi⟩ , h⟩
+  use i
+  use x
+
+  rintro ⟨i , x, h, fxy ⟩
+  use x
+  constructor
+  use i
+  exact fxy
 
 example : (f '' ⋂ i, A i) ⊆ ⋂ i, f '' A i := by
   sorry
