@@ -124,6 +124,14 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - New tools added: `set` tactic (assign definitional name to recurring expression in goal), `wlog` (without-loss-of-generality reduction when symmetry permits), the `[Inhabited α]` typeclass for default-element witnesses
 - Met recursive set definitions via `sbAux` fixed-point construction
 
+## Week 3 summary
+- Completed MIL Ch 4 in full (§4.1 Sets, §4.2 Functions, §4.3 Schröder-Bernstein)
+- Lifted Ch 3 logic toolkit to set operations; met image/preimage and their asymmetric interactions with set operations
+- New tactics: `rwa`, `set`, `wlog`; new typeclass `[Inhabited α]`; first encounter with recursive set definitions
+- Pace remains significantly ahead of master plan's Ch 1-5 / 22-week budget (3 of 5 chapters done in 3 of 22 weeks)
+
+
+
 
 
 ---
