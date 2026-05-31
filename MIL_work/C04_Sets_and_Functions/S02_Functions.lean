@@ -136,6 +136,7 @@ section
 open Set Real
 
 example : InjOn log { x | x > 0 } := by
+
   intro x xpos y ypos
   intro e
   -- log x = log y
@@ -154,16 +155,56 @@ example : range exp = { y | y > 0 } := by
   rw [exp_log ypos]
 
 example : InjOn sqrt { x | x ≥ 0 } := by
-  sorry
+  intro a apos b bpos h
+  calc
+    a = (√a) * (√a)  := by
+      symm
+      rw[mul_self_sqrt apos]
+    _ = (√b) * (√b) := by
+      rw[h]
+    _ = b := by
+      rw[mul_self_sqrt bpos]
+
 
 example : InjOn (fun x ↦ x ^ 2) { x : ℝ | x ≥ 0 } := by
-  sorry
+  intro a apos b bpos
+  dsimp at *
+  intro h
+  have habs : a = b ∨ a = -b := by
+    apply sq_eq_sq_iff_eq_or_eq_neg.mp at h
+    exact h
+
+  calc
+    a = sqrt (a ^ 2) := by
+      rw [sqrt_sq apos]
+    _ = sqrt (b ^ 2) := by
+      rw [h]
+    _ = b := by
+      rw [sqrt_sq bpos]
+
 
 example : sqrt '' { x | x ≥ 0 } = { y | y ≥ 0 } := by
-  sorry
+  ext y; constructor
+  · rintro ⟨x, ⟨xnonneg, rfl⟩⟩
+    apply sqrt_nonneg
+  intro ynonneg
+  use y ^ 2
+  dsimp at *
+  constructor
+  apply pow_nonneg ynonneg
+  apply sqrt_sq
+  assumption
 
 example : (range fun x ↦ x ^ 2) = { y : ℝ | y ≥ 0 } := by
-  sorry
+  ext y
+  constructor
+  · rintro ⟨ x, rfl⟩
+    dsimp at *
+    apply pow_two_nonneg
+  intro ypos
+  use √y
+  dsimp
+  exact sq_sqrt ypos
 
 end
 
@@ -194,11 +235,25 @@ variable (f : α → β)
 
 open Function
 
-example : Injective f ↔ LeftInverse (inverse f) f :=
-  sorry
+example : Injective f ↔ LeftInverse (inverse f) f := by
+  constructor
+  rintro i x
+  apply i
+  apply inverse_spec
+  use x
 
-example : Surjective f ↔ RightInverse (inverse f) f :=
-  sorry
+  intro i x y hxy
+  rw[← i y, ← hxy, i]
+
+
+example : Surjective f ↔ RightInverse (inverse f) f := by
+  constructor
+  · intro h y
+    apply inverse_spec
+    apply h
+  intro h y
+  use inverse f y
+  apply h
 
 end
 
@@ -207,6 +262,7 @@ variable {α : Type*}
 open Function
 
 theorem Cantor : ∀ f : α → Set α, ¬Surjective f := by
+
   intro f surjf
   let S := { i | i ∉ f i }
   rcases surjf S with ⟨j, h⟩
@@ -214,11 +270,12 @@ theorem Cantor : ∀ f : α → Set α, ¬Surjective f := by
     intro h'
     have : j ∉ f j := by rwa [h] at h'
     contradiction
-  have h₂ : j ∈ S
-  sorry
-  have h₃ : j ∉ S
-  sorry
-  contradiction
+  have h₂ : j ∈ S := by
+    assumption
 
--- COMMENTS: TODO: improve this
+  have h₃ : j ∉ S := by
+    rw[h] at h₁
+    exact h₁
+
+  contradiction
 end
