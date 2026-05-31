@@ -118,6 +118,11 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Reached inclusion lemmas for images/preimages with unions
 - Further practice with `use`, `ext`, `rintro` for set-level proofs
 
+## 31-05-2026 (Sun, Week 3.7)
+- Finished §4.2 (`S02_Functions.lean`) — back half: image/preimage with intersections (image needs injectivity), `Set.InjOn` proofs, round-trip equalities
+- Completed §4.3 (`S03_The_Schroeder_Bernstein_Theorem.lean`) — closed out Ch 4
+- New tools added: `set` tactic (assign definitional name to recurring expression in goal), `wlog` (without-loss-of-generality reduction when symmetry permits), the `[Inhabited α]` typeclass for default-element witnesses
+- Met recursive set definitions via `sbAux` fixed-point construction
 
 
 
@@ -227,6 +232,17 @@ Additional from MIL (so far):
 - set builder { y | P y }  unfolds to fun y ↦ Py
 - use Nat.prime.
 - `rwa` - combines rw and assumption tactics
+
+# 4.2 Functions
+- image requires rcases [] with triple of anonymous constructor
+- `ext, intro` - unravels definitions
+- [Inhabited], `default` - preferred member of set
+- `choose` operator eg when invokin AoC
+
+# 4.3 Schroeder-Bernstein
+- recursive definitions via naturals
+- `set` - tactic for abbreviations
+- `wlog` - apply for symmetrical proofs
 
 ---
 
