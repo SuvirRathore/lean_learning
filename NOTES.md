@@ -130,7 +130,10 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - New tactics: `rwa`, `set`, `wlog`; new typeclass `[Inhabited α]`; first encounter with recursive set definitions
 - Pace remains significantly ahead of master plan's Ch 1-5 / 22-week budget (3 of 5 chapters done in 3 of 22 weeks)
 
-
+## 01-06-2026 (Mon, Week 4.1)
+- Started §5.1 (`S01_Irrational_Roots.lean`) — first 5 sorries cleared
+- Completed the core √2-irrationality argument: `m² = 2n²` with `Nat.Coprime m n` derives `2 ∣ m` then `2 ∣ n`, contradicting coprimality
+- First serious use of `Nat.Prime`, `Nat.Coprime`, and `Nat.Prime.dvd_*` lemma family
 
 
 
