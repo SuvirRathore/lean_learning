@@ -49,22 +49,40 @@ example (a b c : Nat) (h : a * b = a * c) (h' : a ≠ 0) : b = c :=
   -- apply? suggests the following:
   (mul_right_inj' h').mp h
 
+#check Nat.dvd_gcd
+#check even_of_even_sqr
+
 example {m n : ℕ} (coprime_mn : m.Coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
   intro sqr_eq
   have : 2 ∣ m := by
-    sorry
+    have h: 2 ∣ m^2 := by
+      rw[sqr_eq]
+      apply dvd_mul_right
+    apply even_of_even_sqr h
+
   obtain ⟨k, meq⟩ := dvd_iff_exists_eq_mul_left.mp this
+
   have : 2 * (2 * k ^ 2) = 2 * n ^ 2 := by
     rw [← sqr_eq, meq]
     ring
-  have : 2 * k ^ 2 = n ^ 2 :=
-    sorry
+
+  have hh : 2 * k ^ 2 = n ^ 2 := by
+    linarith
+
   have : 2 ∣ n := by
-    sorry
+    have h' : 2 ∣ n^2 := by
+      apply dvd_iff_exists_eq_mul_left.mpr
+      use k^2
+      linarith
+    apply even_of_even_sqr h'
+
   have : 2 ∣ m.gcd n := by
-    sorry
+    apply dvd_gcd
+    assumption
+    assumption
   have : 2 ∣ 1 := by
-    sorry
+    rw[coprime_mn] at this
+    exact this
   norm_num at this
 
 example {m n p : ℕ} (coprime_mn : m.Coprime n) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
@@ -117,4 +135,3 @@ example {m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m ^ k = r * n ^ k) {p : ℕ} :
   sorry
 
 #check multiplicity
-
