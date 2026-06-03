@@ -135,6 +135,11 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Completed the core √2-irrationality argument: `m² = 2n²` with `Nat.Coprime m n` derives `2 ∣ m` then `2 ∣ n`, contradicting coprimality
 - First serious use of `Nat.Prime`, `Nat.Coprime`, and `Nat.Prime.dvd_*` lemma family
 
+## 02-06-2026 (Tue, Week 4.2)
+- Finished §5.1 (`S01_Irrational_Roots.lean`) — closed out the general theorem extending the √2 argument to arbitrary primes
+- Worked with prime factorisation machinery (`Nat.Prime.dvd_of_dvd_pow`, factorisation lemmas)
+- New tool added: `simpa` (`simp` followed by `assumption`, closes goal if simplification produces a hypothesis match)
+
 
 
 ---
