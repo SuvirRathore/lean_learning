@@ -140,6 +140,12 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Worked with prime factorisation machinery (`Nat.Prime.dvd_of_dvd_pow`, factorisation lemmas)
 - New tool added: `simpa` (`simp` followed by `assumption`, closes goal if simplification produces a hypothesis match)
 
+## 03-06-2026 (Wed, Week 4.3)
+- Worked through §5.2 (`S02_Induction_and_Recursion.lean`), skipped final exercises recapping NNG-era manual `mul_comm`/`add_assoc` proofs
+- Met Lean 4's pattern-matching induction syntax: `induction n with | zero => ... | succ n ih => ...`
+- Saw recursive function definitions via `def f : ℕ → ℕ | 0 => ... | n + 1 => ...` (structural recursion)
+- Noted strong induction via `Nat.strongRecOn` for cases needing IH on all smaller values
+
 
 
 ---
