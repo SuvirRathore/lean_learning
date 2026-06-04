@@ -146,6 +146,12 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - Saw recursive function definitions via `def f : ℕ → ℕ | 0 => ... | n + 1 => ...` (structural recursion)
 - Noted strong induction via `Nat.strongRecOn` for cases needing IH on all smaller values
 
+## 04-06-2026 (Thu, Week 4.4)
+- Completed §5.3 (`S03_Infinitely_Many_Primes.lean`) — formalised Euclid's argument and its variant for primes in arithmetic progressions
+- Subtle proof: existence of a prime factor `≡ 3 (mod 4)` for suitable N required help; involved threading modular arithmetic through `Finset.prod` lemmas
+- New tools added: `interval_cases n` (case analysis on `n` within a bounded range), `revert h` (inverse of `intro` — puts a hypothesis back into the goal), `decide` (closes goals about decidable propositions by computation)
+- Reinforced: `push_neg`, `by_contra`, strong induction patterns, `Finset` operations and lemma families
+
 
 
 ---
@@ -265,6 +271,23 @@ Additional from MIL (so far):
 - recursive definitions via naturals
 - `set` - tactic for abbreviations
 - `wlog` - apply for symmetrical proofs
+
+# 5.1 Irrational Numbers
+- `rwa` - rw + assumption useful
+- `Nat.Prime` - naming conv and other like Nat.primeFactorsList
+- `norm_num, ring_nf, simpa`
+
+# 5.2 Induction and Recursion
+- inductively define functions like sum, factorial etc
+- `induction n with n hyp`
+- `Finset` - type and operations eg Finset.range n
+
+# 5.3 Primes
+- useful: push_neg, by_contra
+- `interval_cases` - splits into cases if n is bounded
+- `revert` - opposite of intro
+- `decide` - checks truth value, useful for bounded forall
+- Finset useful: ext, simp, tauto, intro etc.
 
 ---
 
