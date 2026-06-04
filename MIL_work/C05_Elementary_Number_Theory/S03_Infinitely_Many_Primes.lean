@@ -42,21 +42,33 @@ theorem exists_prime_factor {n : Nat} (h : 2 ≤ n) : ∃ p : Nat, p.Prime ∧ p
     use p, pp
     apply pdvd.trans mdvdn
 
+#check Nat.factorial_pos
+#check Nat.dvd_factorial
+#check Nat.dvd_sub
+#check Nat.Prime
+
 theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
   intro n
   have : 2 ≤ Nat.factorial n + 1 := by
-    sorry
+    apply Nat.succ_le_succ
+    apply Nat.factorial_pos
   rcases exists_prime_factor this with ⟨p, pp, pdvd⟩
   refine ⟨p, ?_, pp⟩
   show p > n
   by_contra ple
   push_neg at ple
   have : p ∣ Nat.factorial n := by
-    sorry
+    apply Nat.dvd_factorial
+    apply Nat.Prime.pos
+    exact pp
+    exact ple
+
   have : p ∣ 1 := by
-    sorry
+    convert Nat.dvd_sub pdvd this
+    simp
   show False
-  sorry
+  simp at this
+  linarith [pp.two_le]
 open Finset
 
 section
@@ -89,10 +101,13 @@ section
 variable {α : Type*} [DecidableEq α] (r s t : Finset α)
 
 example : (r ∪ s) ∩ (r ∪ t) = r ∪ s ∩ t := by
-  sorry
+  ext x
+  rw [mem_inter, mem_union, mem_union, mem_union, mem_inter]
+  tauto
 example : (r \ s) \ t = r \ (s ∪ t) := by
-  sorry
-
+  ext x
+  simp
+  tauto
 end
 
 example (s : Finset ℕ) (n : ℕ) (h : n ∈ s) : n ∣ ∏ i ∈ s, i :=
@@ -101,7 +116,9 @@ example (s : Finset ℕ) (n : ℕ) (h : n ∈ s) : n ∣ ∏ i ∈ s, i :=
 theorem _root_.Nat.Prime.eq_of_dvd_of_prime {p q : ℕ}
       (prime_p : Nat.Prime p) (prime_q : Nat.Prime q) (h : p ∣ q) :
     p = q := by
-  sorry
+  cases prime_q.eq_one_or_self_of_dvd _ h
+  · linarith [prime_p.two_le]
+  assumption
 
 theorem mem_of_dvd_prod_primes {s : Finset ℕ} {p : ℕ} (prime_p : p.Prime) :
     (∀ n ∈ s, Nat.Prime n) → (p ∣ ∏ n ∈ s, n) → p ∈ s := by
@@ -111,7 +128,11 @@ theorem mem_of_dvd_prod_primes {s : Finset ℕ} {p : ℕ} (prime_p : p.Prime) :
     linarith [prime_p.two_le]
   simp [Finset.prod_insert ans, prime_p.dvd_mul] at h₀ h₁
   rw [mem_insert]
-  sorry
+  rcases h₁ with h₁ | h₁
+  · left
+    exact prime_p.eq_of_dvd_of_prime h₀.1 h₁
+  right
+  exact ih h₀.2 h₁
 example (s : Finset ℕ) (x : ℕ) : x ∈ s.filter Nat.Prime ↔ x ∈ s ∧ x.Prime :=
   mem_filter
 
@@ -125,15 +146,25 @@ theorem primes_infinite' : ∀ s : Finset Nat, ∃ p, Nat.Prime p ∧ p ∉ s :=
     simp [s'_def]
     apply h
   have : 2 ≤ (∏ i ∈ s', i) + 1 := by
-    sorry
+    #check Finset.prod_pos
+    apply Nat.succ_le_succ
+    apply Nat.succ_le_of_lt
+    apply Finset.prod_pos
+    intro i hi
+    rw [mem_filter] at hi
+    exact hi.2.pos
   rcases exists_prime_factor this with ⟨p, pp, pdvd⟩
   have : p ∣ ∏ i ∈ s', i := by
-    sorry
+    apply dvd_prod_of_mem
+    rw [mem_s']
+    apply pp
   have : p ∣ 1 := by
     convert Nat.dvd_sub pdvd this
     simp
   show False
-  sorry
+  simp at this
+  linarith [pp.two_le]
+
 theorem bounded_of_ex_finset (Q : ℕ → Prop) :
     (∃ s : Finset ℕ, ∀ k, Q k → k ∈ s) → ∃ n, ∀ k, Q k → k < n := by
   rintro ⟨s, hs⟩
@@ -171,7 +202,11 @@ theorem two_le_of_mod_4_eq_3 {n : ℕ} (h : n % 4 = 3) : 2 ≤ n := by
       norm_num at h
 
 theorem aux {m n : ℕ} (h₀ : m ∣ n) (h₁ : 2 ≤ m) (h₂ : m < n) : n / m ∣ n ∧ n / m < n := by
-  sorry
+  constructor
+  · exact Nat.div_dvd_of_dvd h₀
+  exact Nat.div_lt_self (lt_of_le_of_lt (zero_le _) h₂) h₁
+
+
 theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
     ∃ p : Nat, p.Prime ∧ p ∣ n ∧ p % 4 = 3 := by
   by_cases np : n.Prime
@@ -189,9 +224,22 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
   have : m % 4 = 3 ∨ n / m % 4 = 3 := by
     apply mod_4_eq_3_or_mod_4_eq_3
     rw [neq, h]
+
   rcases this with h1 | h1
-  . sorry
-  . sorry
+  -- spent too long on this, used solutions
+  · by_cases mp : m.Prime
+    · use m
+    rcases ih m mltn h1 mp with ⟨p, pp, pdvd, p4eq⟩
+    use p
+    exact ⟨pp, pdvd.trans mdvdn, p4eq⟩
+  obtain ⟨nmdvdn, nmltn⟩ := aux mdvdn mge2 mltn
+  by_cases nmp : (n / m).Prime
+  · use n / m
+  rcases ih (n / m) nmltn h1 nmp with ⟨p, pp, pdvd, p4eq⟩
+  use p
+  exact ⟨pp, pdvd.trans nmdvdn, p4eq⟩
+
+
 example (m n : ℕ) (s : Finset ℕ) (h : m ∈ erase s n) : m ≠ n ∧ m ∈ s := by
   rwa [mem_erase] at h
 
@@ -224,4 +272,3 @@ theorem primes_mod_4_eq_3_infinite : ∀ n, ∃ p > n, Nat.Prime p ∧ p % 4 = 3
   have : p = 3 := by
     sorry
   contradiction
-
