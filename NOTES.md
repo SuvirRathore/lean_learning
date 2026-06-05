@@ -152,6 +152,13 @@ Personal notes for my long-term Lean track. Master schedule lives outside this r
 - New tools added: `interval_cases n` (case analysis on `n` within a bounded range), `revert h` (inverse of `intro` — puts a hypothesis back into the goal), `decide` (closes goals about decidable propositions by computation)
 - Reinforced: `push_neg`, `by_contra`, strong induction patterns, `Finset` operations and lemma families
 
+## 05-06-2026 (Fri, Week 4.5)
+- Completed §5.4 (`S04_More_Induction.lean`) — closed out Ch 5 and MIL Ch 1-5 in full
+- Worked through sum formulas using `Finset.sum_range_succ` / `Finset.sum_range_zero` with the standard `induction ... | zero => simp | succ n ih => rw [...]; ring` rhythm
+- Practised two-step / `Nat.le_induction` patterns where applicable
+- Reinforced: `omega` for integer arithmetic, `ring` for finishing algebraic identities after induction steps
+- MILESTONE: MIL Ch 1-5 complete (originally budgeted Weeks 1-22; actual: Weeks 1-4)
+
 
 
 ---
